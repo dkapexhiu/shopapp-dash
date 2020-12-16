@@ -1,11 +1,11 @@
 var config = {
-  apiKey: "AIzaSyC2jQdfRDyLZGvsS1KQ4yKlgWc83EaZkl8",
-  authDomain: "rnfbshop.firebaseapp.com",
-  databaseURL: "https://rnfbshop.firebaseio.com",
-  projectId: "rnfbshop",
-  storageBucket: "rnfbshop.appspot.com",
-  messagingSenderId: "1048239497831",
-  appId: "1:1048239497831:web:242d9b768fd1fd1ecdeac2"
+  apiKey: "",
+  authDomain: "",
+  databaseURL: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: ""
 };
 firebase.initializeApp(config);
 var db = firebase.firestore();
