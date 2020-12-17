@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>APP FB CRUD</title>
+    <title>SHOP APP CRUD</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
@@ -44,12 +44,24 @@
     <div class="row" id="data">
       <h4>Add Product Form</h4>
       <div class="input-field col s12 l6">
-        <input type="text" id="pnombre" class="validate" />
-        <label for="first_name">Name</label>
+        <input type="text" id="name" class="validate" />
+        <label for="name">Name</label>
       </div>
       <div class="input-field col s12 l6">
-        <input type="text" id="snombre" class="validate" />
-        <label for="last_name">Price</label>
+        <input type="text" id="price" class="validate" />
+        <label for="price">Price</label>
+      </div>
+      <div class="input-field col s12 l6">
+        <input type="text" id="lighting" class="validate" />
+        <label for="lighting">Lighting</label>
+      </div>
+      <div class="input-field col s12 l6">
+        <input type="text" id="watering" class="validate" />
+        <label for="watering">Watering</label>
+      </div>
+      <div class="input-field col s12 l6">
+        <input type="text" id="temperature" class="validate" />
+        <label for="temperature">Temperature</label>
       </div>
       <span>Image</span>
       <input
@@ -61,7 +73,7 @@
       <div class="progress">
         <div class="determinate" style="width: 0%;" id="subir"></div>
       </div>
-      <button id="guardar" class="btn waves-effect waves-light blue">
+      <button id="submit" class="btn waves-effect waves-light blue">
         Send
         <i class="material-icons">send</i>
       </button>
@@ -70,9 +82,12 @@
         <thead>
           <tr>
             <th data-field="id">ID</th>
-            <th data-field="primer">Name</th>
-            <th data-field="segundo">Price</th>
-            <th data-field="imagen">Image</th>
+            <th data-field="name">Name</th>
+            <th data-field="price">Price</th>
+            <th data-field="lighting">Lighting</th>
+            <th data-field="watering">Watering</th>
+            <th data-field="temperature">Temperature</th>
+            <th data-field="image">Image</th>
             <th>Options</th>
           </tr>
         </thead>

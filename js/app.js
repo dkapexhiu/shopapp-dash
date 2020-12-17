@@ -1,11 +1,5 @@
 var config = {
-  apiKey: "",
-  authDomain: "",
-  databaseURL: "",
-  projectId: "",
-  storageBucket: "",
-  messagingSenderId: "",
-  appId: ""
+
 };
 firebase.initializeApp(config);
 var db = firebase.firestore();
@@ -38,32 +32,41 @@ function subir(e) {
     function () {
       URL = spaceRef.snapshot.downloadURL;
       console.log(URL);
-      console.log(file.name);
+      //console.log(file.name);
     }
   );
 }
 
 btnGuardar = document
-  .getElementById("guardar")
+  .getElementById("submit")
   .addEventListener("click", guardar);
 function guardar() {
-  var primerNombre = document.getElementById("pnombre").value;
-  var segundoNombre = document.getElementById("snombre").value;
+  var name = document.getElementById("name").value;
+  var price = document.getElementById("price").value;
+  var lighting = document.getElementById("lighting").value;
+  var watering = document.getElementById("watering").value;
+  var temperature = document.getElementById("temperature").value;
 
   const newId = Math.random().toString(36).substring(0);
   db.collection("products")
     .doc(newId)
     .set({
-      name: primerNombre,
-      price: segundoNombre,
+      name: name,
+      price: price,
       thumbnail: URL,
       image: file.name,
+      lighting: lighting,
+      watering: watering,
+      temperature: temperature,
       productId: newId
     })
     .then(function (docRef) {
       console.log("Document written with ID: ", docRef.id);
-      document.getElementById("pnombre").value = "";
-      document.getElementById("snombre").value = "";
+      document.getElementById("name").value = "";
+      document.getElementById("price").value = "";
+      document.getElementById("lighting").value = "";
+      document.getElementById("watering").value = "";
+      document.getElementById("temperature").value = "";
     })
     .catch(function (error) {});
 }
@@ -77,6 +80,9 @@ db.collection("products").onSnapshot((querySnapshot) => {
         <td>${doc.id}</td>
         <td>${doc.data().name}</td>
         <td>${doc.data().price}</td>
+        <td>${doc.data().lighting}</td>
+        <td>${doc.data().watering}</td>
+        <td>${doc.data().temperature}</td>
         <td><img width=10% src=${doc.data().thumbnail} alt=""></td>
         <td>
         <button onclick="borrar('${doc.id}', '${
@@ -99,7 +105,7 @@ function borrar(id, key) {
       desertRef
         .delete()
         .then(function () {
-          console.log("Archivo borrado");
+          //console.log("Archivo eliminator");
         })
         .catch(function (error) {
           // Uh-oh, an error occurred!
