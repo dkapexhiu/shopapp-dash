@@ -1,5 +1,4 @@
 var config = {
-
 };
 firebase.initializeApp(config);
 var db = firebase.firestore();
@@ -31,8 +30,6 @@ function subir(e) {
     },
     function () {
       URL = spaceRef.snapshot.downloadURL;
-      console.log(URL);
-      //console.log(file.name);
     }
   );
 }
@@ -126,12 +123,14 @@ db.collection("orders").onSnapshot((querySnapshot) => {
     cartItems.forEach((item) => {
       orders.innerHTML += `
             <tr>
+            <td>${doc.id}</td>
             <td>${item.productId}</td>
             <td>${item.name}</td>
             <td>${item.price}</td>
             <td>${item.quantity}</td>
             <td>${doc.data().cartTotal}</td>
             <td>${doc.data().uid}</td>
+            </tr>
             `;
     });
   });
@@ -148,6 +147,24 @@ db.collection("users").onSnapshot((querySnapshot) => {
             <td>${doc.data().id}</td>
             <td>${doc.data().fullName}</td>
             <td>${doc.data().email}</td>
+            </tr>
+            `;
+  });
+});
+
+//payments crm
+var payments = document.getElementById("payments");
+db.collection("payments").onSnapshot((querySnapshot) => {
+  payments.innerHTML = "";
+  querySnapshot.forEach((doc) => {
+    //console.log(doc.data());
+    payments.innerHTML += `
+            <tr>
+            <td>${doc.id}</td>
+            <td>${doc.data().data.message}</td>
+            <td>${doc.data().email}</td>
+            <td>${doc.data().orderId}</td>
+            </tr>
             `;
   });
 });
