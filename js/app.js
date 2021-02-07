@@ -111,6 +111,66 @@ function borrar(id, key) {
     .catch(function (error) {
       console.error("Error removing document: ", error);
     });
+};
+
+var subidaEdit = document.getElementById("subirEdit");
+var archivoEdit = document
+  .getElementById("archivoEdit")
+  .addEventListener("change", subirEdit);
+var URLEdit;
+var fileEdit;
+
+function subirEdit(e) {
+  fileEdit = e.target.files[0]; // use the Blob or File API
+  var spaceRef = storageRef.child("images/" + fileEdit.name).put(fileEdit);
+  spaceRef.on(
+    "state_changed",
+    function (snapshot) {
+      var progresoEdit = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      subidaEdit.style.width = progresoEdit + "%";
+    },
+    function (error) {
+      // Handle unsuccessful uploads
+    },
+    function () {
+      URLEdit = spaceRef.snapshot.downloadURL;
+    }
+  );
+}
+
+var btnEdit = document
+  .getElementById("submitEdit")
+  .addEventListener("click", edit);
+
+function edit() {
+
+  var idEdit = document.getElementById("idEdit").value;
+  var nameEdit = document.getElementById("nameEdit").value;
+  var priceEdit = document.getElementById("priceEdit").value;
+  var lightingEdit = document.getElementById("lightingEdit").value;
+  var wateringEdit = document.getElementById("wateringEdit").value;
+  var temperatureEdit = document.getElementById("temperatureEdit").value;
+
+  db.collection("products")
+    .doc(idEdit)
+    .update({
+      name: nameEdit,
+      price: priceEdit,
+      thumbnail: URLEdit,
+      image: fileEdit.name,
+      lighting: lightingEdit,
+      watering: wateringEdit,
+      temperature: temperatureEdit,
+    })
+    .then(function (docRef) {
+      console.log("Document written with ID: ", docRef.id);
+      document.getElementById("nameEdit").value = "";
+      document.getElementById("priceEdit").value = "";
+      document.getElementById("lightingEdit").value = "";
+      document.getElementById("wateringEdit").value = "";
+      document.getElementById("temperatureEdit").value = "";
+    })
+    .catch(function (error) {});
 }
 
 //orders crm
